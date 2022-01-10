@@ -51,7 +51,6 @@
 # optimizer = tf.keras.optimizers.Adam(1e-4) #Optimizador
 # mse = tf.keras.losses.MeanSquaredError() #Funcion de perdida.
 
-"""# Build DQN Agent and Helper Functions"""
 
 #A continuaciñon, crearemos el búfer de reproducción de experiencias para agregar la
 #Experencia al bufer y probarlo mas tarde para el entrenamiento.
@@ -173,7 +172,6 @@ for episode in range(num_episodes+1):
 env.close()
 
 def show_video():
-  """Enables video recording of gym environment and shows it."""
   mp4list = glob.glob('video/*.mp4')
   if len(mp4list) > 0:
     mp4 = mp4list[0]
