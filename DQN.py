@@ -1,55 +1,54 @@
 
-# %%capture
-# !apt-get update
-# !apt-get install -y xvfb python-opengl ffmpeg
-# !pip install pyglet==1.3.2
-# !pip install gym pyvirtualdisplay
-# from collections import deque
-# import numpy as np
-# import tensorflow as tf
-# import random
-# import math
-# import time
-# import os
-# import io
-# import glob
-# import gym
-# import base64
-# from gym.wrappers import Monitor
-# from IPython.display import HTML
-# from IPython import display as ipythondisplay
-# from pyvirtualdisplay import Display
-# display = Display(visible=0, size=(1400, 900))
-# display.start()
-# 
-# env = gym.make('CartPole-v0')
-# num_features = env.observation_space.shape[0]
-# num_actions = env.action_space.n
-# 
-# 
-# #Para implementar el algoritmo DQN, comenzaremos creando los DNN principal (main_nn) 
-# #Y objetivo (target_nn). La red de destino sera una copia de la principal, pero con 
-# #Su propia copia de los pesos. Tambien necesitaremos un optimizador y una funcion de perdida.
-# 
-# class DQN(tf.keras.Model):
-#   """Dense neural network class."""
-#   def __init__(self):
-#     super(DQN, self).__init__()
-#     self.dense1 = tf.keras.layers.Dense(32, activation="relu")
-#     self.dense2 = tf.keras.layers.Dense(32, activation="relu")
-#     self.dense3 = tf.keras.layers.Dense(num_actions, dtype=tf.float32) # No activation
-# 
-#   def call(self, x):
-#     """Forward pass."""
-#     x = self.dense1(x)
-#     x = self.dense2(x)
-#     return self.dense3(x)
-# 
-# main_nn = DQN()
-# target_nn = DQN()
-# 
-# optimizer = tf.keras.optimizers.Adam(1e-4) #Optimizador
-# mse = tf.keras.losses.MeanSquaredError() #Funcion de perdida.
+ %%capture
+ !apt-get update
+ !apt-get install -y xvfb python-opengl ffmpeg
+ !pip install pyglet==1.3.2
+ !pip install gym pyvirtualdisplay
+ from collections import deque
+ import numpy as np
+ import tensorflow as tf
+ import random
+ import math
+ import time
+ import os
+ import io
+ import glob
+ import gym
+ import base64
+ from gym.wrappers import Monitor
+ from IPython.display import HTML
+ from IPython import display as ipythondisplay
+ from pyvirtualdisplay import Display
+ display = Display(visible=0, size=(1400, 900))
+ display.start()
+ 
+ env = gym.make('CartPole-v0')
+ num_features = env.observation_space.shape[0]
+ num_actions = env.action_space.n
+ 
+ 
+ #Para implementar el algoritmo DQN, comenzaremos creando los DNN principal (main_nn) 
+ #Y objetivo (target_nn). La red de destino sera una copia de la principal, pero con 
+ #Su propia copia de los pesos. Tambien necesitaremos un optimizador y una funcion de perdida.
+ 
+ class DQN(tf.keras.Model):
+   def __init__(self):
+     super(DQN, self).__init__()
+     self.dense1 = tf.keras.layers.Dense(32, activation="relu")
+     self.dense2 = tf.keras.layers.Dense(32, activation="relu")
+     self.dense3 = tf.keras.layers.Dense(num_actions, dtype=tf.float32) # No activation
+ 
+   def call(self, x):
+     """Forward pass."""
+     x = self.dense1(x)
+     x = self.dense2(x)
+     return self.dense3(x)
+ 
+ main_nn = DQN()
+ target_nn = DQN()
+ 
+ optimizer = tf.keras.optimizers.Adam(1e-4) #Optimizador
+ mse = tf.keras.losses.MeanSquaredError() #Funcion de perdida.
 
 
 #A continuaciñon, crearemos el búfer de reproducción de experiencias para agregar la
